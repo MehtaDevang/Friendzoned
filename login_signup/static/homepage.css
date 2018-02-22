@@ -1,0 +1,369 @@
+
+body {
+    background-color: #dedede;
+}
+
+.topbar {
+	background: #2A3F54;
+	border-color: #2A3F54;
+	border-radius: 0px;
+}
+
+.topbar .navbar-header a {
+	color: #ffffff;
+}
+
+.wrapper {
+    padding-left: 0px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.sidebar {
+    z-index: 1000;
+    position: fixed;
+    top: 50px;
+    left: -50px;
+    width: 50px;
+    height: 100%;
+    overflow-y: auto;
+    background: #2A3F54;
+	color: #ffffff;
+	-webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.main {
+	width: 100%;
+    position: relative;
+    padding-bottom:20px;
+}
+
+.wrapper.toggled {
+	padding-left: 50px;
+}
+
+.wrapper.toggled .sidebar {
+	left: 0;
+}
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+    position: absolute;
+    top: 52px;
+    width: 50px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.sidebar-nav li {
+    line-height: 40px;
+}
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #e8e8e8;
+    padding: 0;
+    text-align:center;
+}
+
+.sidebar-nav li a:hover, .sidebar-nav li.active a {
+    text-decoration: none;
+    color: #fff;
+    background: #fff;
+    background: rgba(255,255,255,0.2);
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav li span, .subbar li span {
+	display : none;
+}
+
+nav.subbar {
+	position: relative;
+	width: 100%;
+	border-radius: 0px;
+	background: #fff;
+	margin: 50px 0 -50px 0;
+	padding: 10px 0 0 0;
+	z-index: 2;
+}
+nav.subbar > ul.nav.nav-tabs {
+	padding: 0 5px;
+}
+
+nav.subbar > ul.nav.nav-tabs > li.active > a {
+    background: #dedede;
+    border-top: 1px solid #a6a6a6;
+    border-left: 1px solid #a6a6a6;
+    border-right: 1px solid #a6a6a6;
+    border-radius: 0px;
+}
+
+.content {
+    margin-top: 70px;
+    padding: 0 30px;
+}
+
+@media(min-width:768px){
+	.subbar li span {
+		display: inline;
+	}
+}
+
+@media(min-width:992px) {
+    .wrapper {
+    	padding-left: 50px;
+    }
+
+    .sidebar {
+    	left: 0;
+    	width: 50px;
+	}
+
+	.wrapper.toggled {
+		padding-left: 200px;
+	}
+
+	.wrapper.toggled .sidebar, .wrapper.toggled .sidebar-nav {
+		width: 200px;
+	}
+
+	.wrapper.toggled .sidebar-nav li a {
+		text-align: left;
+		padding: 0 0 0 10px;
+	}
+
+	.wrapper.toggled .sidebar-nav li span {
+		display: inline;
+	}
+
+}
+
+.navbar-btn {
+    background: none;
+    border: none;
+    height: 35px;
+    min-width: 35px;
+    color: #fff;
+}
+.navbar-text {
+  margin-top: 14px;
+  margin-bottom: 14px;
+}
+@media (min-width: 768px) {
+  .navbar-text {
+    float: left;
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+}
+
+.content h1 {
+	text-align: center;
+}
+.content .content-footer p {
+	color: #6d6d6d;
+    font-size: 12px;
+    text-align: center;
+}
+.content .content-footer p a {
+	color: inherit;
+	font-weight: bold;
+}
+
+/*	--------------------------------------------------
+	:: Table Filter
+	-------------------------------------------------- */
+.panel {
+	border: 1px solid #ddd;
+	background-color: #fcfcfc;
+}
+.panel .btn-group {
+	margin: 15px 0 30px;
+}
+.panel .btn-group .btn {
+	transition: background-color .3s ease;
+}
+.table-filter {
+	background-color: #fff;
+	border-bottom: 1px solid #eee;
+}
+.table-filter tbody tr:hover {
+	cursor: pointer;
+	background-color: #eee;
+}
+.table-filter tbody tr td {
+	padding: 10px;
+	vertical-align: middle;
+	border-top-color: #eee;
+}
+.table-filter tbody tr.selected td {
+	background-color: #eee;
+}
+.table-filter tr td:first-child {
+	width: 38px;
+}
+.table-filter tr td:nth-child(2) {
+	width: 35px;
+}
+.ckbox {
+	position: relative;
+}
+.ckbox input[type="checkbox"] {
+	opacity: 0;
+}
+.ckbox label {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+.ckbox label:before {
+	content: '';
+	top: 1px;
+	left: 0;
+	width: 18px;
+	height: 18px;
+	display: block;
+	position: absolute;
+	border-radius: 2px;
+	border: 1px solid #bbb;
+	background-color: #fff;
+}
+.ckbox input[type="checkbox"]:checked + label:before {
+	border-color: #2BBCDE;
+	background-color: #2BBCDE;
+}
+.ckbox input[type="checkbox"]:checked + label:after {
+	top: 3px;
+	left: 3.5px;
+	content: '\e013';
+	color: #fff;
+	font-size: 11px;
+	font-family: 'Glyphicons Halflings';
+	position: absolute;
+}
+.table-filter .star {
+	color: #ccc;
+	text-align: center;
+	display: block;
+}
+.table-filter .star.star-checked {
+	color: #F0AD4E;
+}
+.table-filter .star:hover {
+	color: #ccc;
+}
+.table-filter .star.star-checked:hover {
+	color: #F0AD4E;
+}
+.table-filter .media-photo {
+	width: 40px;
+}
+.table-filter .media-body {
+    display: inline;
+    /* Had to use this style to force the div to expand (wasn't necessary with my bootstrap version 3.3.6) */
+}
+.table-filter .media-meta {
+	font-size: 11px;
+	color: #999;
+}
+.table-filter .media .title {
+	color: #2BBCDE;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: normal;
+	margin: 0;
+}
+.table-filter .media .title span {
+	font-size: .8em;
+	margin-right: 20px;
+}
+.table-filter .media .title span.pagado {
+	color: #5cb85c;
+}
+.table-filter .media .title span.pendiente {
+	color: #f0ad4e;
+}
+.table-filter .media .title span.cancelado {
+	color: #d9534f;
+}
+.table-filter .media .summary {
+	font-size: 14px;
+}
+
+
+/* Testimonials */
+.testimonials blockquote {
+    background: #f8f8f8 none repeat scroll 0 0;
+    border: medium none;
+    color: #666;
+    display: block;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 15px;
+    position: relative;
+}
+.testimonials blockquote::before {
+    width: 0;
+    height: 0;
+	right: 0;
+	bottom: 0;
+	content: " ";
+	display: block;
+	position: absolute;
+    border-bottom: 20px solid #fff;
+	border-right: 0 solid transparent;
+	border-left: 15px solid transparent;
+	border-left-style: inset; /*FF fixes*/
+	border-bottom-style: inset; /*FF fixes*/
+}
+.testimonials blockquote::after {
+    width: 0;
+    height: 0;
+    right: 0;
+    bottom: 0;
+    content: " ";
+    display: block;
+    position: absolute;
+    border-style: solid;
+    border-width: 20px 20px 0 0;
+    border-color: #e63f0c transparent transparent transparent;
+}
+.testimonials .carousel-info img {
+    border: 1px solid #f5f5f5;
+    border-radius: 150px !important;
+    height: 75px;
+    padding: 3px;
+    width: 75px;
+}
+.testimonials .carousel-info {
+    overflow: hidden;
+}
+.testimonials .carousel-info img {
+    margin-right: 15px;
+}
+.testimonials .carousel-info span {
+    display: block;
+}
+.testimonials span.testimonials-name {
+    color: #e6400c;
+    font-size: 16px;
+    font-weight: 300;
+    margin: 23px 0 7px;
+}
+.testimonials span.testimonials-post {
+    color: #656565;
+    font-size: 12px;
+    font-size: 12px;
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Raleway:500' rel='stylesheet' type='text/css'>
+    {% load static %}
+    <link type="text/css" rel="stylesheet" href="{% static 'login.css' %}">
+
+</head>
+
+<body>
+<div class="middlePage">
+<div class="page-header">
+  <h1 class="logo">Friendzoned <small>A New Era Of Being Socially Connected!</small></h1>
+</div>
+
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">Please Sign In</h3>
+  </div>
+  <div class="panel-body">
+
+  <div class="row">
+
+    <div class="col-md-7" style="border-left:1px solid #ccc;height:210px">
+<form class="form-horizontal" action="{% url 'check_login' %}" method="post">
+    {% csrf_token %}
+<fieldset>
+
+  <input id="textinput" name="username" type="text" placeholder="Enter User Name" class="form-control input-md"><br>
+  <input id="textinput" name="password" type="password" placeholder="Enter Password" class="form-control input-md">
+      <div class="spacing"><input type="checkbox" name="checkboxes" id="checkboxes-0" value="1"><small> Remember me</small></div>
+
+  <div class="spacing"><a href="#"><small> Forgot Password?</small></a><br/></div>
+    <div class="spacing"><a href="{% url 'signup' %}"><small>Don't have an account?</small></a></div>
+
+  <button id="singlebutton" name="singlebutton" class="btn btn-info btn-sm pull-right">Log In</button>
+
+
+</fieldset>
+</form>
+</div>
+
+</div>
+
+</div>
+</div>
+
+<p><a href="https://github.com/arjunkomath">About</a> · Devang Mehta</p>
+
+</div>
+</body>
+</html>

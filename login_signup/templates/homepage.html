@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Homepage</title>
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		{% load static %}
+		<link rel="stylesheet" type="text/css" href="{% static 'homepage.css' %}">
+		<script type="text/javascript" src = "{% static 'homepage.js' %}"></script>
+	</head>
+
+	<body class="home">
+		<link href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css" rel="stylesheet" media="screen">
+
+		<nav class="navbar navbar-default navbar-fixed-top topbar">
+			<div class="container-fluid">
+
+				<div class="navbar-header">
+
+					<p class="navbar-text">
+						<a href="#" class="sidebar-toggle">
+							<i class="fa fa-bars"></i>
+						</a>
+					</p>
+
+					<a href="#" class="navbar-brand">
+
+							<span class="hidden-xs">{{ user.name }}</span>
+					</a>
+
+				</div>
+
+				<div class="navbar-collapse collapse" id="navbar-collapse-main">
+
+					<ul class="nav navbar-nav navbar-right">
+
+						<li>
+							<button class="navbar-btn">
+								<i class="fa fa-bell"></i>
+							</button>
+						</li>
+
+						<li class="dropdown">
+							<button class="navbar-btn" data-toggle="dropdown">
+
+								<img src="{{ user.profile_picture }}" class="img-circle">
+							</button>
+							<ul class="dropdown-menu">
+								<li><a href="#">Account</a></li>
+								<li><a href="#">Dashboard</a></li>
+								<li class="nav-divider"></li>
+								<li><a href="{% url 'logout' %}">Logout</a></li>
+							</ul>
+						</li>
+
+					</ul>
+
+				</div>
+			</div>
+		</nav>
+
+		<article class="wrapper">
+
+			<aside class="sidebar">
+				<ul class="sidebar-nav">
+					<li class="active"><a href="#dashboard" data-toggle="tab"><i class="fa fa-dashboard"></i> <span>Homepage</span></a></li>
+					<li><a href="#configuration" data-toggle="tab"><i class="fa fa-user"></i> <span>Profile</span></a></li>
+					<li><a href="#mail" data-toggle="tab"><i class="fa fa-envelope"></i> <span>Messages</span></a></li>
+					<li><a href="#users" data-toggle="tab"><i class="fa fa-users"></i> <span>Notification</span></a></li>
+				</ul>
+			</aside>
+
+			<section class="main">
+
+				<section class="tab-content">
+
+				   <section class="tab-pane active fade in content" id="dashboard">
+
+						<div class="row">
+
+							<div class="col-xs-12 col-sm-6" style="">
+								<div class="panel panel-primary" style="">
+									<div class="panel-body">
+								        <form action="{% url 'add_post' %}" method="post">
+                                            {% csrf_token %}
+                                            <input type="number" name="post_id"><br>
+                                            <textarea rows="3" cols="95" name="post" placeholder="Say Something..."></textarea><br>
+                                            <button type="submit" class="btn btn-primary" value="{{ user.username }}" name="button_submit">POST</button>
+                                        </form>
+									</div>
+								</div>
+							</div>
+
+
+							<div class="col-xs-6 col-sm-3">
+								<div class="panel panel-danger">
+									<div class="panel-body">
+										<br/><br/><br/><br/>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xs-6 col-sm-3">
+								<div class="panel panel-warning">
+									<div class="panel-body">
+										<br/><br/><br/><br/>
+									</div>
+								</div>
+							</div>
+
+						   <div class="col-xs-7 col-sm-7">
+							   <div class="panel panel-default">
+								   <div class="panel-heading">
+									   Posts
+								   </div>
+								   <div class="panel-body" style="">
+                                       <div class="container content pull-left" style=";margin-right:350px;">
+                                           {% for p in posts %}
+                                                {% for f in user.friends.all %}
+                                                    {% if p.posted_by.username == f.username %}
+                                                        <div class="row" style="border:1px solid #AAA;margin-right:26%;">
+                                                            <div class="col-md-12 panel panel-default" style="padding-top:10px;">
+                                                                <div class="testimonials">
+                                                                    <div class="active item panel-heading">
+                                                                        <span class="testimonials-name" class = "pull-right" style="font-size:20px;color:#006699;">{{ p.posted_by.name }}</span>
+                                                                        <img alt="" src="http://keenthemes.com/assets/bootsnipp/img1-small.jpg" width="25px" class="pull-left">&nbsp;&nbsp;&nbsp;
+                                                                        <span class="testimonials-name" class="pull-right" style="font-size:14px;color:#006699;">{{ p.post_time }}</span>
+                                                                        <br><br>
+                                                                      <div class="carousel-info">
+                                                                        <blockquote><p>{{ p.post }}</p></blockquote>
+                                                                      </div>
+                                                                        <div class="panel-footer">
+                                                                            <form action="{% url 'add_comment' %}" method="post">
+                                                                                {% csrf_token %}
+                                                                                <input type="number" name="comment_id">
+                                                                                <textarea rows="4" cols="90%" style="position:relative;" name = "comment" placeholder="add Comment..."></textarea>
+                                                                                <button class="btn btn-default" name="button_submit" type="submit" value="{{ user.username }}">Comment</button>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                    {% endif %}
+                                                {% endfor %}
+                                           {% endfor %}
+                                        </div>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
+
+								   </div>
+							   </div>
+						   </div>
+
+						   <div class="col-xs-12 col-sm-3 pull-right" >
+							   <div class="panel panel-default">
+								   <div class="panel-heading">
+									   Something
+								   </div>
+								   <div class="panel-body">
+								   </div>
+							   </div>
+
+							   <div class="panel panel-default">
+								   <div class="panel-heading">
+								   </div>
+								   <div class="panel-body">
+									   Designed by <a href="http://www.kaitanilabs.com" target="_blank">Devang Mehta</a></a>
+								   </div>
+							   </div>
+						   </div>
+
+					   </div>
+
+				   </section>
+
+				   <section class="tab-pane fade" id="configuration">
+					   <nav class="subbar">
+							<ul class="nav nav-tabs">
+								<li class="active"><a href="#access" data-toggle="tab"><i class="fa fa-user"></i> <span>Basic Profile</span></a></li>
+								<li><a href="#friends" data-toggle="tab"><i class="fa fa-users"></i> <span>Friends</span></a></li>
+							</ul>
+						</nav>
+
+						<section class="tab-content content">
+
+							<section class="tab-pane active fade in" id="access">
+
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="panel panel-default" width = "300px">
+											<div class="panel-heading">
+												Profile
+											</div>
+											<div class="panel-body">
+												<br><br>
+											<div class="container-fluid well span3">
+												<center>
+												<div class="row-fluid">
+													<div class="span6" >
+															<img src="{{ user.profile_picture }}" class="img-circle">
+													</div>
+
+													<div class="span8">
+														<h3>{{ user.name }}</h3>
+														<h6>{{ user.username }}</h6>
+														<h6>{{ user.dob }}</h6>
+													</div>
+
+													<div class="span2">
+														<div class="btn-group">
+															<a class="btn dropdown-toggle btn-info" data-toggle="dropdown" href="#">
+																Action
+																<span class="icon-cog icon-white"></span><span class="caret"></span>
+															</a>
+															<ul class="dropdown-menu">
+																<li><a href="#"><span class="icon-wrench"></span> Modify</a></li>
+																<li><a href="#"><span class="icon-trash"></span> Delete</a></li>
+															</ul>
+														</div>
+													</div>
+											</div>
+												</center>
+											</div>
+												<br/><br/><br/><br/>
+											</div>
+										</div>
+									</div>
+
+								</div>
+
+							</section>
+
+							<section class="tab-pane fade" id="friends">
+
+								<div class="row">
+									<div class="col-xs-12 col-sm-8 col-md-9">
+										<div class="panel panel-default">
+											<div class="panel-heading">
+												My Friends
+											</div>
+											<div class="panel-body">
+													{% for f in user.friends.all %}
+														{{ f.name }}<br>
+													{% endfor %}
+												<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+											</div>
+										</div>
+									</div>
+
+									<div class="hidden-xs col-sm-4 col-md-3">
+										<div class="panel panel-default">
+											<div class="panel-heading">
+												Suggested Friends
+											</div>
+											<div class="panel-body">
+												Click on Name To Send Friend Request <br>
+												{% for c in alluser %}
+														{% if c not in user.friends.all %}
+																	{% if c.username != user.username %}
+																		<div>
+																			<form action="{% url 'send_request' %}" method="post">
+																				{% csrf_token %}
+																				<button style="width:100%;margin:2px" class = "btn btn-primary" type="submit" value="{{ user.username }}-{{ c.username }}" name="button_data">{{ c.name }}</button><br>
+																			</form>
+																		</div>
+																	{% endif %}
+														{% endif %}
+												{% endfor %}
+												<br/><br/><br/>
+											</div>
+										</div>
+
+										<div class="panel panel-default">
+											<div class="panel-heading">
+												Friend Requests
+											</div>
+											<div class="panel-body">
+												Click To ACCEPT Requests
+												{% for f in friend_requests %}
+														{% if f.request_to == user.username %}
+															<div>
+																<form action="{% url 'accept_request' %}" method="post">
+																	{% csrf_token %}
+																	<button class="btn btn-primary" style="width:100%;" type="submit" value="{{ f.request_from.username }}-{{ user.username }}" name="button_data">{{ f.request_from.name }}</button>
+																</form>
+															</div>
+														{% endif %}
+												{% endfor %}
+												<br/><br/><br/>
+											</div>
+										</div>
+									</div>
+							   </div>
+							</section>
+
+						</section>
+
+				   </section>
+
+				   <section class="tab-pane fade" id="users">
+
+				   </section>
+
+				   <section class="tab-pane fade" id="mail" style="margin-top:5%;">
+                            <div class="container" style="width:100%;">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                    <div class="span8">
+                                      <form class="form-horizontal span6" action="{% url 'send_message' %}" method="post">
+                                          {% csrf_token %}
+                                        <fieldset>
+                                          <legend>Message</legend>
+
+                                          <div class="control-group">
+                                            <label class="control-label">Message to</label>
+                                            <div class="controls">
+                                                <select name = "message_to">
+                                                    {% for f in user.friends.all %}
+                                                    <option>{{ f.username }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                          </div>
+
+                                          <div class="control-group">
+                                            <label class="control-label">Messsage Text</label>
+                                            <div class="controls">
+                                              <div class="row-fluid">
+                                                <div class="span3">
+                                                    <textarea type="textarea" rows="3" cols="30" class="input-block-level" autocomplete="off" name = "message" required></textarea>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                            <br>
+                                          <div class="form-actions">
+                                            <button type="submit" class="btn btn-primary" value = "{{ user.username }}" name="button_data">Send</button>
+                                            <button type="button" class="btn btn-danger">Cancel</button>
+                                          </div>
+                                        </fieldset>
+                                      </form>
+                                    </div>
+                                    </div>
+                                        <div class="col-md-10">
+                                            <div class="panel panel-default">
+                                                <div class="panel-body">
+                                                    <div>
+                                                        <h1>Messages</h1>
+                                                    </div>
+                                                    <div class="table-container">
+                                                        <table class="table table-filter">
+                                                            <tbody>
+                                                                {% for message in messages %}
+                                                                    {% if user.username == message.message_to %}
+                                                                        <tr data-status="pagado">
+                                                                            <td>
+                                                                                <div class="media">
+                                                                                    <a href="#" class="pull-left">
+                                                                                        <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
+                                                                                    </a>
+                                                                                    <div class="media-body">
+                                                                                        <span class="media-meta pull-right">{{ message.message_time }}</span>
+                                                                                        <h4 class="title">
+                                                                                            {{ message.message_from }}
+                                                                                        </h4>
+                                                                                        <p class="summary">{{ message.message }}</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    {% endif %}
+                                                                {% endfor %}
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+
+                                </div>
+                            </div>
+				   </section>
+
+				</section>
+
+
+
+
+			</section>
+
+		</article>
+	</body>
+</html>
